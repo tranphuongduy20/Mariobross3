@@ -47,7 +47,7 @@ PlayScene::PlayScene() : Scene()
 {
 	keyHandler = new PlayScenceKeyHandler(this);
 	LoadBaseObjects();
-	ChooseMap(STAGE_1*3);
+	ChooseMap(STAGE_1);
 	Game::GetInstance()->ResetTimer();
 }
 
@@ -113,7 +113,7 @@ void PlayScene::ChooseMap(int whatMap)
 		player->Reset();
 		mapWidth = 2816;
 		mapHeight = 656;
-		//player->SetPosition(2544, 85);
+		player->SetPosition(2544, 85);
 	}
 	else if (idStage == 1500)
 	{
@@ -259,73 +259,98 @@ void PlayScene::Update(DWORD dt)
 	{
 		game->SetCamPos(0, 250);
 	}
-
-	if (isHiddenArea)
+	else if (idStage == 1000)
 	{
-		//game->SetCamPos(2095, 465);
-		float cx, cy;
-		player->GetPosition(cx, cy);
-		cx -= SCREEN_WIDTH / 2;
-		if (cx > 2127 && isLight == true)
+		if (isHiddenArea)
 		{
-			cx = cx - SCREEN_WIDTH / 2 - 23;
-			cy = 465;
-		}
-		//DebugOut(L"cx = %f", cx);
-		game->SetCamPos(cx, 465);
-		//DebugOut(L"set cam \n");
-	}
-	if (idStage == 1500 && game->GetCamPosX() > 1791)
-	{
-		isEndMap4 = true;
-	}
-	if (idStage == 1500 && isEndMap4 == false)
-	{
-		//if (!player) return;
-		posCamX += 0.4;
-		if (player->x < posCamX)
-		{
-			player->x = posCamX;
-			player->isPushed = true;
-		}
-		else if (player->x > (posCamX + SCREEN_WIDTH - 28))
-		{
-			player->x = posCamX + SCREEN_WIDTH - 28;
-			player->isPushed = true;
+			//game->SetCamPos(2095, 465);
+			float cx, cy;
+			player->GetPosition(cx, cy);
+			cx -= SCREEN_WIDTH / 2;
+			if (cx > 2127 && isLight == true)
+			{
+				cx = cx - SCREEN_WIDTH / 2 - 23;
+				cy = 465;
+			}
+			//DebugOut(L"cx = %f", cx);
+			game->SetCamPos(cx, 465);
+			//DebugOut(L"set cam \n");
 		}
 		else
 		{
-			player->isPushed = false;
+			if (!player) return;
+
+			int marioBox = player->level == MARIO_LEVEL_SMALL ? MARIO_SMALL_BBOX_HEIGHT : MARIO_BIG_BBOX_HEIGHT;
+
+			float cx, cy;
+			player->GetPosition(cx, cy);
+			cx -= SCREEN_WIDTH / 2;
+
+			if ((player->flyTrip && player->level == MARIO_LEVEL_RACCOON) || player->Gety() + marioBox / 2 > player->dGround) {
+				cy = (cy + marioBox) - (float)SCREEN_HEIGHT * 0.6;
+			}
+			else {
+				cy = player->dGround + marioBox / 2 - (float)SCREEN_HEIGHT * 0.6;
+			}
+
+			BoundaryConstraint(cx, cy);
+			game->SetCamPos(cx, cy);
 		}
-		DebugOut(L"posCamx %f \n", posCamX);
-		game->SetCamPos(posCamX, 250);
 	}
 	else
 	{
-		if (!player) return;
-
-		int marioBox = player->level == MARIO_LEVEL_SMALL ? MARIO_SMALL_BBOX_HEIGHT : MARIO_BIG_BBOX_HEIGHT;
-
-		float cx, cy;
-		player->GetPosition(cx, cy);
-		cx -= SCREEN_WIDTH / 2;
-
-		if ((player->flyTrip && player->level == MARIO_LEVEL_RACCOON) || player->Gety() + marioBox / 2 > player->dGround) {
-			cy = (cy + marioBox) - (float)SCREEN_HEIGHT * 0.6;
-		}
-		else {
-			cy = player->dGround + marioBox / 2 - (float)SCREEN_HEIGHT * 0.6;
-		}
-
-		BoundaryConstraint(cx, cy);
-		if (idStage == 1500)
+		if (idStage == 1500 && game->GetCamPosX() > 1791)
 		{
-			if (cx > 1790 && isMovePipe == false)
-				cx = 1790;
-			else if (cx < 2064 && isMovePipe == true)
-				cx = 2064;
+			isEndMap4 = true;
 		}
-		game->SetCamPos(cx, cy);
+		if (idStage == 1500 && isEndMap4 == false)
+		{
+			//if (!player) return;
+			posCamX += 0.4;
+			if (player->x < posCamX)
+			{
+				player->x = posCamX;
+				player->isPushed = true;
+			}
+			else if (player->x > (posCamX + SCREEN_WIDTH - 28))
+			{
+				player->x = posCamX + SCREEN_WIDTH - 28;
+				player->isPushed = true;
+			}
+			else
+			{
+				player->isPushed = false;
+			}
+			DebugOut(L"posCamx %f \n", posCamX);
+			game->SetCamPos(posCamX, 250);
+		}
+		else
+		{
+			if (!player) return;
+
+			int marioBox = player->level == MARIO_LEVEL_SMALL ? MARIO_SMALL_BBOX_HEIGHT : MARIO_BIG_BBOX_HEIGHT;
+
+			float cx, cy;
+			player->GetPosition(cx, cy);
+			cx -= SCREEN_WIDTH / 2;
+
+			if ((player->flyTrip && player->level == MARIO_LEVEL_RACCOON) || player->Gety() + marioBox / 2 > player->dGround) {
+				cy = (cy + marioBox) - (float)SCREEN_HEIGHT * 0.6;
+			}
+			else {
+				cy = player->dGround + marioBox / 2 - (float)SCREEN_HEIGHT * 0.6;
+			}
+
+			BoundaryConstraint(cx, cy);
+			if (idStage == 1500)
+			{
+				if (cx > 1790 && isMovePipe == false)
+					cx = 1790;
+				else if (cx < 2064 && isMovePipe == true)
+					cx = 2064;
+			}
+			game->SetCamPos(cx, cy);
+		}
 	}
 	DebugOut(L"cam x  = %f camy = %f \n", game->GetCamPosX(), game->GetCamPosY());
 #pragma endregion
