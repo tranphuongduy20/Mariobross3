@@ -111,7 +111,12 @@ void KoopaBullet::Update(DWORD dt, vector<LPGAMEENTITY>* coObjects)
 				for (int i = 0; i < coEventsResult.size(); i++)
 				{
 					LPCOLLISIONEVENT e = coEventsResult.at(i);
-					if (dynamic_cast<Brick*>(e->obj))
+					if (dynamic_cast<CBrick*>(e->obj))
+					{
+						if (e->nx != 0)
+							x += dx;
+					}
+					else if (dynamic_cast<Brick*>(e->obj))
 					{
 						Brick* brick = dynamic_cast<Brick*>(e->obj);
 						if (e->nx != 0)
@@ -132,6 +137,11 @@ void KoopaBullet::Update(DWORD dt, vector<LPGAMEENTITY>* coObjects)
 								nx = -1;
 							}
 						}
+					}
+					else if (e->nx != 0)
+					{
+						this->nx = -this->nx;
+						SetState(KOOPABULLET_STATE_WALKING);
 					}
 				}
 				//DebugOut(L"\nny:  %d", ny);
@@ -161,7 +171,7 @@ void KoopaBullet::Render()
 	{
 		listEffect[i]->Render();
 	}
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void KoopaBullet::SetSpeed()

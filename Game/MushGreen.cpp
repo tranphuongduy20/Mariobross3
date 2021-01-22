@@ -144,7 +144,7 @@ void MushGreen::Render()
 
 	animationSet->at(ani)->Render(nx, x, y, alpha);
 
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void MushGreen::SetState(int state)

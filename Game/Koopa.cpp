@@ -436,7 +436,7 @@ void Koopa::Render()
 		listEffect[i]->Render();
 	}
 	//DebugOut(L"gia tri state %d \n", state);
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void Koopa::SetState(int State)
@@ -456,7 +456,7 @@ void Koopa::SetState(int State)
 		else
 			vx = -0.05;
 		if (last_state != KOOPA_RED_STATE_DIE_AND_MOVE_UP)
-			vy = -0.15;
+			vy = -KOOPAS_DIE_AND_MOVE_SPEED;
 		timeToRevive = GetTickCount64();
 		last_state = KOOPA_RED_STATE_DIE_UP;
 		break;
@@ -474,7 +474,7 @@ void Koopa::SetState(int State)
 		break;
 	case KOOPA_RED_STATE_DIE_AND_MOVE:
 		//vx = nx * 0.1;
-		vx = Mario->nx* 0.15;
+		vx = Mario->nx* KOOPAS_DIE_AND_MOVE_SPEED;
 		last_state = KOOPA_RED_STATE_DIE_AND_MOVE;
 		break;
 	case KOOPA_RED_STATE_REVIVE:
@@ -485,7 +485,7 @@ void Koopa::SetState(int State)
 		break;
 	case KOOPA_RED_STATE_DIE_AND_MOVE_UP:
 		last_state = KOOPA_RED_STATE_DIE_AND_MOVE_UP;
-		vx = Mario->nx * 0.15;
+		vx = Mario->nx * KOOPAS_DIE_AND_MOVE_SPEED;
 		break;
 	case KOOPA_RED_STATE_HOLDING:
 		last_state = KOOPA_RED_STATE_HOLDING;
@@ -511,7 +511,7 @@ void Koopa::SetState(int State)
 		break;
 	case KOOPA_GREEN_STATE_DIE_AND_MOVE:
 		last_state = KOOPA_GREEN_STATE_DIE_AND_MOVE;
-		vx = Mario->nx * 0.15;
+		vx = Mario->nx * KOOPAS_DIE_AND_MOVE_SPEED;
 		break;
 	case KOOPA_GREEN_STATE_DIE_UP:
 		if (Mario->nx > 0)
@@ -525,7 +525,7 @@ void Koopa::SetState(int State)
 		break;
 	case KOOPA_GREEN_STATE_DIE_AND_MOVE_UP:
 		last_state = KOOPA_GREEN_STATE_DIE_AND_MOVE_UP;
-		vx = Mario->nx * 0.15;
+		vx = Mario->nx * KOOPAS_DIE_AND_MOVE_SPEED;
 		break;
 	case KOOPA_GREEN_STATE_REVIVE:
 		last_state = KOOPA_GREEN_STATE_REVIVE;

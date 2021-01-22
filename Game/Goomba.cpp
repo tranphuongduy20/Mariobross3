@@ -339,7 +339,7 @@ void Goomba::SetState(int state)
 		break;
 	case GOOMBA_STATE_DIE_FLY:
 		vx = -vx;
-		vy = -0.15;
+		vy = -GOOMBA_DIE_FLY_SPEED;
 		break;
 	case GOOMBA_RED_STATE_NO_WING_DIE:
 		vx = 0;
@@ -347,7 +347,7 @@ void Goomba::SetState(int state)
 		break;
 	case GOOMBA_RED_STATE_NO_WING_DIE_FLY:
 		vx = -vx;
-		vy = -0.15;
+		vy = -GOOMBA_DIE_FLY_SPEED;
 		break;
 	case GOOMBA_RED_STATE_HAS_WING_WALK:
 		SetSpeed();
@@ -362,7 +362,7 @@ void Goomba::SetState(int state)
 		break;
 	case GOOMBA_RED_STATE_HAS_WING_FLY_HIGH:
 		isGrounded = false;
-		vy = -0.15;
+		vy = -GOOMBA_DIE_FLY_SPEED;
 		SetSpeed();
 		break;
 	}

@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "Point.h"
 
-#define KOOPAS_WALKING_SPEED 0.03f;
+#define KOOPASFLY_WALKING_SPEED 0.05;
 
 #define KOOPAS_BBOX_WIDTH 17
 #define KOOPAS_BBOX_HEIGHT 27

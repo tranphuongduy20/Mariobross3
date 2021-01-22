@@ -4,6 +4,7 @@
 #include "Player.h"
 
 #define GOOMBA_WALKING_SPEED 0.04f;
+#define GOOMBA_DIE_FLY_SPEED 0.15;
 
 #define GOOMBA_BBOX_WIDTH 16
 #define GOOMBA_BBOX_HEIGHT 15

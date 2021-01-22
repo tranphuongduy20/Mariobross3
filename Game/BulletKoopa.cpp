@@ -22,7 +22,7 @@ void BulletKoopa::Render()
 		alpha = 255;
 	}
 	animationSet->at(0)->Render(1, x, y, alpha);
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void BulletKoopa::Update(DWORD dt, vector<LPGAMEENTITY>* coObjects)

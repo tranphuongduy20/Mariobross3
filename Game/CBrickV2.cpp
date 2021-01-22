@@ -53,7 +53,7 @@ void CBrickV2::SetState(int state)
 				y -= 16;
 				vy += 0.05;
 				count++;
-				Money* money1 = new Money(x + 5, y);
+				Money* money1 = new Money(x + 7, y + 1);
 				money.push_back(money1);
 				money1->SetState(MONEY_STATE_WALKING);
 				money1->make100 = true;

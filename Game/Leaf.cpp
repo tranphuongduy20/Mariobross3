@@ -7,7 +7,7 @@ Leaf::Leaf(float posX, float posY)
 	//alpha = 0;
 	x = posX;
 	y = posY;
-	oldY = y+1;
+	oldY = y-10;
 	oldX = x;
 	tag = EntityType::LEAF;
 	SetState(0);

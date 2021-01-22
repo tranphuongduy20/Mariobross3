@@ -123,7 +123,7 @@ void PlayScene::ChooseMap(int whatMap)
 			DebugOut(L"[INFO] player CREATED! \n");
 		}
 		player->Reset();
-		player->SetPosition(124, 85);
+		player->SetPosition(80, 85);
 		player->SetLevel(MARIO_LEVEL_RACCOON);
 		mapWidth = 2576;
 		mapHeight = 464;

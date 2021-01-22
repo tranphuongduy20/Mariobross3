@@ -3,7 +3,7 @@
 void BrickMove::Render()
 {
 	animationSet->at(0)->Render(nx, x, y);
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void BrickMove::GetBoundingBox(float& l, float& t, float& r, float& b)

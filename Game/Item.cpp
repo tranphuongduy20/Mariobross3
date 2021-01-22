@@ -80,7 +80,5 @@ void Item::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 	{
 		left = x;
 		top = y;
-		/*right = x + animationSet->at(0)->GetAnimationCurrentFrame(0)->GetSprite()->GetFrameWidth();
-		bottom = y + animationSet->at(0)->GetAnimationCurrentFrame(0)->GetSprite()->GetFrameHeight();*/
 	}
 }
