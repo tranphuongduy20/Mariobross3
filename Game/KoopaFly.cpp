@@ -71,7 +71,7 @@ void KoopaFly::Render()
 		listEffect[i]->Render();
 	}
 	//DebugOut(L"gia tri state %d \n", state);
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void KoopaFly::SetState(int State)
