@@ -113,7 +113,7 @@ void PlayScene::ChooseMap(int whatMap)
 		player->Reset();
 		mapWidth = 2816;
 		mapHeight = 656;
-		player->SetPosition(2544, 85);
+		player->SetPosition(25, 85);
 	}
 	else if (idStage == 1500)
 	{

@@ -6,7 +6,7 @@
 #include "Goomba.h"
 
 
-#define KOOPAS_WALKING_SPEED 0.03f;
+#define KOOPAS_WALKING_SPEED 0.02f;
 
 #define KOOPAS_BBOX_WIDTH 17
 #define KOOPAS_BBOX_HEIGHT 27
